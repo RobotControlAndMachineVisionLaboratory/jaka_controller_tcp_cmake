@@ -16,14 +16,32 @@ int main(int argc, char **argv)
 	robotclient.SetRate(rapid_ratio);
 
 	std::vector<float> jointpose;
-	jointpose={0,90,0,90,180,0};
+	jointpose={0,90,0,90,-90,45};
 	float vel=50;
 	robotclient.MoveJ(jointpose,vel);
-	getchar();
+
+	// getchar();
 
 	std::vector<float> cartpose;
-	cartpose={-0.313956, 0.116250, 0.469512, -157.792, 20.705, 49.107};
+	cartpose={-313.956, 116.250, 469.512, -157.792, 20.705, 49.107};
 	robotclient.MoveE(cartpose,vel);
+
+	// getchar();
+
+	cartpose={-313.956, 116.250, 520.520, -157.792, 20.705, 49.107};
+	robotclient.MoveE(cartpose,vel);
+
+	// getchar();
+
+	cartpose={-313.956, 116.250, 469.512, -157.792, 20.705, 49.107};
+	robotclient.MoveE(cartpose,vel);
+
+	// getchar();
+
+	cartpose={-313.956, 116.250, 520.520, -157.792, 20.705, 49.107};
+	robotclient.MoveE(cartpose,vel);
+
+	// getchar();
 
 	robotclient.SetAout(2,0,256);
 	robotclient.SetAout(2,2,255);
