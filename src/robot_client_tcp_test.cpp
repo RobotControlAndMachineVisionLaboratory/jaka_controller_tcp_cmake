@@ -9,12 +9,21 @@
 
 int main(int argc, char **argv)
 {
-	RobotClient robotclient("192.168.1.106");
+	RobotClient robotclient("192.168.51.15");
 
-	std::vector<float> pose;
-	pose={0,90,0,90,180,0};
+	std::cout<<"ready to -- SetRate";
+	float rapid_ratio=0.6;
+	robotclient.SetRate(rapid_ratio);
+
+	std::vector<float> jointpose;
+	jointpose={0,90,0,90,180,0};
 	float vel=50;
-	robotclient.MovJ(pose,vel);
+	robotclient.MoveJ(jointpose,vel);
+	getchar();
+
+	std::vector<float> cartpose;
+	cartpose={-0.313956, 0.116250, 0.469512, -157.792, 20.705, 49.107};
+	robotclient.MoveE(cartpose,vel);
 
 	robotclient.SetAout(2,0,256);
 	robotclient.SetAout(2,2,255);
@@ -22,7 +31,7 @@ int main(int argc, char **argv)
 	robotclient.SetAout(2,0,2304);
 
 	std::vector<float> joint,cart;
-	while(1)
+	for (int i = 0; i < 10; ++i)
 	{
 		robotclient.GetRobotPose(joint,cart);
 		std::cout<<"joint = ";
@@ -38,11 +47,5 @@ int main(int argc, char **argv)
 		}
 		std::cout<<std::endl;
 	}
-
-	std::cout<<"ready to -- SetRate";
-	getchar();
-	float rapid_ratio=0.6;
-	robotclient.SetRate(rapid_ratio);
-
 	return 0;
 }
